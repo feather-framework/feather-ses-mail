@@ -82,6 +82,10 @@ public struct SESMailDriver: MailClient, Sendable {
         )
     }
 
+    /// Validates a mail using the configured validator.
+    ///
+    /// - Parameter mail: The mail to validate.
+    /// - Throws: `MailValidationError` when validation fails.
     public func validate(_ mail: Mail) async throws(MailValidationError) {
         try await validator.validate(mail)
     }
