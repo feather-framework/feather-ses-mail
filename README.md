@@ -49,6 +49,7 @@ https://feather-framework.github.io/feather-mail-driver-ses/
 
 - [Feather Mail](https://github.com/feather-framework/feather-mail)
 - [Feather Mail Driver SMTP](https://github.com/feather-framework/feather-mail-driver-smtp)
+- [Feather Mail Driver Memory](https://github.com/feather-framework/feather-memory-mail)
 
 ## Development
 
