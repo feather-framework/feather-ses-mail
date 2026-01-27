@@ -90,7 +90,7 @@ public struct SESMailDriver: MailClient, Sendable {
     /// using the internally managed SES client. It does not create or
     /// tear down network resources.
     ///
-    /// - Parameter email: The mail to send.
+    /// - Parameter mail: The mail to send.
     /// - Throws: `MailError` if validation, encoding, or delivery fails
     public func send(_ mail: Mail) async throws(MailError) {
         do {
