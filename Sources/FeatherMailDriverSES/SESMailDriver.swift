@@ -22,7 +22,7 @@ import Logging
 /// These resources are created during initialization and must be explicitly
 /// shut down when the server stops.
 public struct SESMailDriver: MailClient, Sendable {
-    
+
     /// Validator used to validate mails before sending.
     private let validator: MailValidator
 
@@ -61,7 +61,9 @@ public struct SESMailDriver: MailClient, Sendable {
         endpoint: String? = nil,
         timeout: TimeAmount? = nil,
         byteBufferAllocator: ByteBufferAllocator = .init(),
-        validator: MailValidator = BasicMailValidator(maxTotalAttachmentSize: 7_500_000),
+        validator: MailValidator = BasicMailValidator(
+            maxTotalAttachmentSize: 7_500_000
+        ),
         logger: Logger = .init(label: "feather.mail.ses")
     ) {
         self.client = client
@@ -79,7 +81,7 @@ public struct SESMailDriver: MailClient, Sendable {
             options: []
         )
     }
-    
+
     public func validate(_ mail: Mail) async throws(MailValidationError) {
         try await validator.validate(mail)
     }
@@ -95,7 +97,8 @@ public struct SESMailDriver: MailClient, Sendable {
     public func send(_ mail: Mail) async throws(MailError) {
         do {
             try await validate(mail)
-        } catch {
+        }
+        catch {
             throw .validation(error)
         }
 
