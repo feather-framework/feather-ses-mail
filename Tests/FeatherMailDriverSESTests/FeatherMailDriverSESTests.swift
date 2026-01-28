@@ -5,7 +5,11 @@
 //  Created by Tibor Bödecs on 2023. 01. 16..
 //
 
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
 import Foundation
+#endif
 import Testing
 import FeatherMail
 import FeatherMailDriverSES

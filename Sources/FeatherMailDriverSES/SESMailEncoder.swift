@@ -5,7 +5,11 @@
 //  Created by gerp83 on 2025. 01. 16..
 //
 
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
 import Foundation
+#endif
 import FeatherMail
 
 /// Encodes `Mail` values into base64-encoded MIME messages for Amazon SES.

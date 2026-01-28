@@ -5,7 +5,11 @@
 //  Created by Binary Birds on 2026. 01. 27..
 //
 
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
 import Foundation
+#endif
 import Testing
 import FeatherMail
 import SotoCore
