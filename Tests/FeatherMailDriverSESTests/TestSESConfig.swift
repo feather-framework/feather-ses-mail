@@ -28,9 +28,9 @@ struct TestSESConfig {
 
     var isComplete: Bool {
         !accessKeyId.isEmpty
-            || !secretAccessKey.isEmpty
-            || !region.isEmpty
-            || !from.isEmpty
-            || !to.isEmpty
+            && !secretAccessKey.isEmpty
+            && !region.isEmpty
+            && !from.isEmpty
+            && !to.isEmpty
     }
 }
