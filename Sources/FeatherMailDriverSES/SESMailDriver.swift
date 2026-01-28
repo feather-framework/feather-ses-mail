@@ -1,6 +1,6 @@
 //
 //  SESMailDriver.swift
-//  feather-mail-driver-ses
+//  feather-ses-mail
 //
 //  Created by gerp83 on 2025. 01. 16..
 //

@@ -2,7 +2,11 @@
 
 Amazon SES-backed mail driver for Feather Mail.
 
-![Release: 1.0.0-beta.1](https://img.shields.io/badge/Release-1%2E0%2E0--beta%2E1-F05138)
+[
+    ![Release: 1.0.0-beta.1](https://img.shields.io/badge/Release-1%2E0%2E0--beta%2E1-F05138)
+](
+    https://github.com/feather-framework/feather-ses-mail/releases/tag/1.0.0-beta.1
+)
 
 ## Features
 
@@ -14,32 +18,39 @@ Amazon SES-backed mail driver for Feather Mail.
 ## Requirements
 
 ![Swift 6.1+](https://img.shields.io/badge/Swift-6%2E1%2B-F05138)
-![Platforms: macOS](https://img.shields.io/badge/Platforms-macOS-F05138)
+![Platforms: macOS, iOS, tvOS, watchOS, visionOS](https://img.shields.io/badge/Platforms-macOS_%7C_iOS_%7C_tvOS_%7C_watchOS_%7C_visionOS-F05138)
 
 - Swift 6.1+
 - Platforms:
-    - macOS 10.15+
+    - macOS 13+
+    - iOS 16+
+    - tvOS 16+
+    - watchOS 9+
+    - visionOS 1+
 
 ## Installation
 
 Use Swift Package Manager; add the dependency to your `Package.swift` file:
 
 ```swift
-.package(url: "https://github.com/feather-framework/feather-mail-driver-ses", .upToNextMinor(from: "1.0.0-beta.1")),
+.package(url: "https://github.com/feather-framework/feather-ses-mail", exact: "1.0.0-beta.1"),
 ```
 
 Then add `FeatherMailDriverSES` to your target dependencies:
 
 ```swift
-.product(name: "FeatherMailDriverSES", package: "feather-mail-driver-ses"),
+.product(name: "FeatherMailDriverSES", package: "feather-ses-mail"),
 ```
 
 ## Usage
 
-![DocC API documentation](https://img.shields.io/badge/DocC-API_documentation-F05138)
+[ 
+    ![DocC API documentation](https://img.shields.io/badge/DocC-API_documentation-F05138)
+](
+    https://feather-framework.github.io/feather-ses-mail/
+)
 
-API documentation is available at the official site:
-https://feather-framework.github.io/feather-mail-driver-ses/
+API documentation is available at the following link.
 
 > [!WARNING]
 > This repository is a work in progress, things can break until it reaches v1.0.0.
@@ -62,4 +73,4 @@ https://feather-framework.github.io/feather-mail-driver-ses/
 
 ## Contributing
 
-[Pull requests](https://github.com/feather-framework/feather-mail-driver-ses/pulls) are welcome. Please keep changes focused and include tests for new logic.
+[Pull requests](https://github.com/feather-framework/feather-ses-mail/pulls) are welcome. Please keep changes focused and include tests for new logic.

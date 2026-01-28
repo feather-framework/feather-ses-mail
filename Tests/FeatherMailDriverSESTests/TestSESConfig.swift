@@ -1,6 +1,6 @@
 //
 //  TestSESConfig.swift
-//  feather-mail-driver-ses
+//  feather-ses-mail
 //
 //  Created by Binary Birds on 2026. 01. 26..
 //

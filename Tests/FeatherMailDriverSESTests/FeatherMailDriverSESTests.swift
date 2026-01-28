@@ -1,6 +1,6 @@
 //
 //  FeatherMailDriverSESTests.swift
-//  feather-mail-driver-ses
+//  feather-ses-mail
 //
 //  Created by Tibor Bödecs on 2023. 01. 16..
 //
