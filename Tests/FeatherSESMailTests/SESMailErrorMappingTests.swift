@@ -13,7 +13,7 @@ import Foundation
 import Testing
 import FeatherMail
 import SotoCore
-@testable import FeatherMailDriverSES
+@testable import FeatherSESMail
 
 @Suite
 struct SESMailErrorMappingTests {

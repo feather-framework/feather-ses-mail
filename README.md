@@ -1,4 +1,4 @@
-# Feather Mail Driver SES
+# Feather SES Mail
 
 Amazon SES-backed mail driver for Feather Mail.
 
@@ -36,10 +36,10 @@ Use Swift Package Manager; add the dependency to your `Package.swift` file:
 .package(url: "https://github.com/feather-framework/feather-ses-mail", exact: "1.0.0-beta.1"),
 ```
 
-Then add `FeatherMailDriverSES` to your target dependencies:
+Then add `FeatherSESMail` to your target dependencies:
 
 ```swift
-.product(name: "FeatherMailDriverSES", package: "feather-ses-mail"),
+.product(name: "FeatherSESMail", package: "feather-ses-mail"),
 ```
 
 ## Usage
@@ -59,8 +59,8 @@ API documentation is available at the following link.
 ## Related repositories
 
 - [Feather Mail](https://github.com/feather-framework/feather-mail)
-- [Feather Mail Driver SMTP](https://github.com/feather-framework/feather-mail-driver-smtp)
-- [Feather Mail Driver Memory](https://github.com/feather-framework/feather-memory-mail)
+- [Feather SMTP Mail](https://github.com/feather-framework/feather-smtp-mail)
+- [Feather Memory Mail](https://github.com/feather-framework/feather-memory-mail)
 
 ## Development
 

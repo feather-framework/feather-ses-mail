@@ -31,17 +31,18 @@ let package = Package(
         .visionOS(.v2),
     ],
     products: [
-        .library(name: "FeatherMailDriverSES", targets: ["FeatherMailDriverSES"]),
+        .library(name: "FeatherSESMail", targets: ["FeatherSESMail"]),
     ],
     dependencies: [
         // [docc-plugin-placeholder]
         .package(url: "https://github.com/soto-project/soto-core", from: "7.0.0"),
         .package(url: "https://github.com/soto-project/soto", from: "7.0.0"),
-        .package(url: "https://github.com/feather-framework/feather-mail", .upToNextMinor(from: "1.0.0-beta.1")),
+        //.package(url: "https://github.com/feather-framework/feather-mail", .upToNextMinor(from: "1.0.0-beta.1")),
+        .package(path: "../feather-mail"),
     ],
     targets: [
         .target(
-            name: "FeatherMailDriverSES",
+            name: "FeatherSESMail",
             dependencies: [
                 .product(name: "FeatherMail", package: "feather-mail"),
                 .product(name: "SotoSESv2", package: "soto"),
@@ -49,10 +50,10 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "FeatherMailDriverSESTests",
+            name: "FeatherSESMailTests",
             dependencies: [
                 .product(name: "FeatherMail", package: "feather-mail"),
-                .target(name: "FeatherMailDriverSES"),
+                .target(name: "FeatherSESMail"),
             ]
         ),
     ]

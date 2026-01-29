@@ -1,5 +1,5 @@
 //
-//  FeatherMailDriverSESTests.swift
+//  FeatherSESMailTests.swift
 //  feather-ses-mail
 //
 //  Created by Tibor Bödecs on 2023. 01. 16..
@@ -12,11 +12,11 @@ import Foundation
 #endif
 import Testing
 import FeatherMail
-import FeatherMailDriverSES
+import FeatherSESMail
 import SotoCore
 
 @Suite
-struct FeatherMailDriverSESTests {
+struct FeatherSESMailTests {
 
     // MARK: - Environment
 
