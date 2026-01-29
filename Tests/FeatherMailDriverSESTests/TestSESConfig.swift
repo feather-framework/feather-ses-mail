@@ -5,6 +5,12 @@
 //  Created by Binary Birds on 2026. 01. 26..
 //
 
+#if canImport(FoundationEssentials)
+import FoundationEssentials
+#else
+import Foundation
+#endif
+
 struct TestSESConfig {
     let accessKeyId: String
     let secretAccessKey: String
@@ -13,16 +19,25 @@ struct TestSESConfig {
     let to: String
 
     static func load() -> TestSESConfig {
-        // NOTE: This test config is intentionally hardcoded and does not read
-        // environment variables or .env files. These tests are integration
-        // tests; fill in the values below locally when you want to run them.
-        // Keep secrets out of source control.
+        // NOTE: Tests read from environment variables first and then fall back
+        // to hardcoded values below.
+        //
+        // Environment variables (preferred):
+        //   SES_ACCESS_KEY_ID
+        //   SES_SECRET_ACCESS_KEY
+        //   SES_REGION
+        //   SES_FROM
+        //   SES_TO
+        //
+        // To run integration tests locally without env vars, fill in the values
+        // below. Keep secrets out of source control.
+        let env = ProcessInfo.processInfo.environment
         return TestSESConfig(
-            accessKeyId: "",
-            secretAccessKey: "",
-            region: "",
-            from: "",
-            to: ""
+            accessKeyId: env["SES_ACCESS_KEY_ID"] ?? "",
+            secretAccessKey: env["SES_SECRET_ACCESS_KEY"] ?? "",
+            region: env["SES_REGION"] ?? "",
+            from: env["SES_FROM"] ?? "",
+            to: env["SES_TO"] ?? ""
         )
     }
 
