@@ -1,0 +1,13 @@
+.github/**
+docker/**
+Sources/SotoSESv2/sesv2-2019-09-27.json
+.gitignore
+.swift-format
+.swiftformatignore
+.swiftheaderignore
+LICENSE
+Makefile
+Package.swift
+Package.resolved
+README.md
+soto.config.json
