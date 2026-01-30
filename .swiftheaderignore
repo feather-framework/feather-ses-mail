@@ -5,6 +5,7 @@ Sources/SotoSESv2/sesv2-2019-09-27.json
 .swift-format
 .swiftformatignore
 .swiftheaderignore
+.unacceptablelanguageignore
 LICENSE
 Makefile
 Package.swift
