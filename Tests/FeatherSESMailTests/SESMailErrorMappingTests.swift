@@ -5,11 +5,7 @@
 //  Created by Binary Birds on 2026. 01. 27..
 //
 
-#if canImport(FoundationEssentials)
-import FoundationEssentials
-#else
 import Foundation
-#endif
 import Testing
 import FeatherMail
 import SotoCore
@@ -24,14 +20,28 @@ struct SESMailErrorMappingTests {
     func mapsAWSErrorTypeToCustom() {
         let error = AWSResponseError(errorCode: "BadRequestException")
         let mapped = mapSESError(error)
-        #expect(mapped == .custom("AWSErrorType - BadRequestException"))
+        if case let .custom(message) = mapped,
+            message == "AWSErrorType - BadRequestException"
+        {
+            #expect(true)
+        }
+        else {
+            #expect(Bool(false))
+        }
     }
 
     @Test
     func mapsURLErrorToCustom() {
         let error = URLError(.timedOut)
         let mapped = mapSESError(error)
-        #expect(mapped == .custom("SES - Transport/networking error"))
+        if case let .custom(message) = mapped,
+            message == "SES - Transport/networking error"
+        {
+            #expect(true)
+        }
+        else {
+            #expect(Bool(false))
+        }
     }
 
     @Test

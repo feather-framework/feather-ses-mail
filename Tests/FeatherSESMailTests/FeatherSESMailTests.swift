@@ -45,7 +45,6 @@ struct FeatherSESMailTests {
 
     @Test
     func sendPlainTextMail() async throws {
-        if !config.isComplete { return }
         let driver = makeDriver()
         defer { Task { try? await driver.shutdown() } }
 
@@ -61,7 +60,6 @@ struct FeatherSESMailTests {
 
     @Test
     func sendHTMLMail() async throws {
-        if !config.isComplete { return }
         let driver = makeDriver()
         defer { Task { try? await driver.shutdown() } }
 
@@ -77,7 +75,6 @@ struct FeatherSESMailTests {
 
     @Test
     func sendMailWithAttachment() async throws {
-        if !config.isComplete { return }
         let driver = makeDriver()
         defer { Task { try? await driver.shutdown() } }
 
@@ -102,7 +99,6 @@ struct FeatherSESMailTests {
 
     @Test
     func invalidMailFailsBeforeSending() async {
-        if !config.isComplete { return }
         let driver = makeDriver()
         defer { Task { try? await driver.shutdown() } }
 
@@ -112,9 +108,19 @@ struct FeatherSESMailTests {
             subject: "Invalid sender",
             body: .plainText("This should not be sent.")
         )
-
-        await #expect(throws: MailError.validation(.invalidSender)) {
+        do {
             try await driver.send(mail)
+            #expect(Bool(false))
+        }
+        catch {
+            if case let .validation(validationError) = error,
+                validationError == .invalidSender
+            {
+                #expect(true)
+            }
+            else {
+                #expect(Bool(false))
+            }
         }
     }
 

@@ -23,8 +23,8 @@ struct TestSESConfig {
         // to hardcoded values below.
         //
         // Environment variables (preferred):
-        //   SES_ACCESS_KEY_ID
-        //   SES_SECRET_ACCESS_KEY
+        //   SES_ID
+        //   SES_SECRET
         //   SES_REGION
         //   SES_FROM
         //   SES_TO
@@ -33,19 +33,12 @@ struct TestSESConfig {
         // below. Keep secrets out of source control.
         let env = ProcessInfo.processInfo.environment
         return TestSESConfig(
-            accessKeyId: env["SES_ACCESS_KEY_ID"] ?? "",
-            secretAccessKey: env["SES_SECRET_ACCESS_KEY"] ?? "",
-            region: env["SES_REGION"] ?? "",
-            from: env["SES_FROM"] ?? "",
-            to: env["SES_TO"] ?? ""
+            accessKeyId: env["SES_ID"]!,
+            secretAccessKey: env["SES_SECRET"]!,
+            region: env["SES_REGION"]!,
+            from: env["SES_FROM"]!,
+            to: env["SES_TO"]!
         )
     }
 
-    var isComplete: Bool {
-        !accessKeyId.isEmpty
-            && !secretAccessKey.isEmpty
-            && !region.isEmpty
-            && !from.isEmpty
-            && !to.isEmpty
-    }
 }

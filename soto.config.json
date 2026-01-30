@@ -1,0 +1,9 @@
+{
+  "services": {
+    "sesv2": {
+      "operations": [
+        "sendEmail"
+      ]
+    }
+  }
+}
