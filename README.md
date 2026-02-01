@@ -1,6 +1,6 @@
 # Feather SES Mail
 
-Amazon SES-backed mail driver for Feather Mail.
+Amazon SES-backed mail client for Feather Mail.
 
 [![Release: 1.0.0-beta.1](https://img.shields.io/badge/Release-1%2E0%2E0--beta%2E1-F05138)](https://github.com/feather-framework/feather-ses-mail/releases/tag/1.0.0-beta.1)
 

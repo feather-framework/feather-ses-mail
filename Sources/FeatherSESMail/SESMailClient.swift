@@ -1,31 +1,27 @@
 //
-//  SESMailDriver.swift
+//  SESMailClient.swift
 //  feather-ses-mail
 //
 //  Created by gerp83 on 2025. 01. 16..
 //
 
-#if canImport(FoundationEssentials)
-import FoundationEssentials
-#else
 import Foundation
-#endif
 import FeatherMail
 import SotoCore
 import SotoSESv2
 import Logging
 
-/// A mail driver implementation backed by Amazon SES.
+/// A mail client implementation backed by Amazon SES.
 ///
-/// `SESMailDriver` is intended to be initialized once during server startup
+/// `SESMailClient` is intended to be initialized once during server startup
 /// and reused for the lifetime of the application. It validates mails,
 /// encodes them into SES-compatible MIME messages, and delivers them using
 /// the Amazon SES v2 API.
 ///
-/// The driver owns an underlying `AWSClient` and an `SESv2` client instance.
+/// The client owns an underlying `AWSClient` and an `SESv2` client instance.
 /// These resources are created during initialization and must be explicitly
 /// shut down when the server stops.
-public struct SESMailDriver: MailClient, Sendable {
+public struct SESMailClient: MailClient, Sendable {
 
     /// Validator used to validate mails before sending.
     private let validator: MailValidator
@@ -42,48 +38,23 @@ public struct SESMailDriver: MailClient, Sendable {
     /// Logger used for Amazon SES operations.
     private let logger: Logger
 
-    /// Creates a new Amazon SES mail driver.
-    ///
-    /// This initializer should typically be called during server startup.
-    /// The resulting driver instance is expected to live for the entire
-    /// lifetime of the application.
+    /// Creates a new Amazon SES mail client using an existing SES client.
     ///
     /// - Parameters:
-    ///   - client: A configured `AWSClient` instance. The driver takes
-    ///     ownership of this client and will shut it down when requested.
-    ///   - region: The AWS region where SES is hosted.
-    ///   - partition: The AWS partition to use (defaults to `.aws`).
-    ///   - endpoint: An optional custom SES endpoint.
-    ///   - timeout: An optional request timeout.
-    ///   - byteBufferAllocator: Byte buffer allocator used by the AWS client.
+    ///   - ses: A configured `SESv2` client instance.
     ///   - validator: Validator applied before delivery.
     ///   - logger: Logger used for SES request and transport logging.
     public init(
-        client: AWSClient,
-        region: Region,
-        partition: AWSPartition = .aws,
-        endpoint: String? = nil,
-        timeout: TimeAmount? = nil,
-        byteBufferAllocator: ByteBufferAllocator = .init(),
+        ses: SESv2,
         validator: MailValidator = BasicMailValidator(
             maxTotalAttachmentSize: 7_500_000
         ),
         logger: Logger = .init(label: "feather.mail.ses")
     ) {
-        self.client = client
+        self.ses = ses
+        self.client = ses.client
         self.validator = validator
         self.logger = logger
-
-        // Construct SES client using the initializer
-        self.ses = SESv2(
-            client: client,
-            region: region,
-            partition: partition,
-            endpoint: endpoint,
-            timeout: timeout,
-            byteBufferAllocator: byteBufferAllocator,
-            options: []
-        )
     }
 
     /// Validates a mail using the configured validator.
@@ -133,11 +104,21 @@ public struct SESMailDriver: MailClient, Sendable {
         }
     }
 
-    /// Shuts down the underlying AWS client.
-    ///
-    /// Call this when the server is stopping to release network
-    /// resources and event loops.
-    public func shutdown() async throws {
-        try await client.shutdown()
+    /// Maps Amazon SES errors to `MailError` values.
+    private func mapSESError(_ error: Error) -> MailError {
+
+        // MARK: - SES service-level errors (returned by SES)
+
+        if let awsError = error as? AWSErrorType {
+            return .custom("AWSErrorType - \(awsError.errorCode)")
+        }
+
+        // MARK: - Transport / networking
+
+        if error is URLError {
+            return .custom("SES - Transport/networking error")
+        }
+
+        return .unknown(error)
     }
 }
