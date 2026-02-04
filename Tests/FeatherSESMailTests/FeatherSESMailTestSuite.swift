@@ -137,7 +137,9 @@ struct FeatherSESMailTestSuite {
                 )
                 do {
                     try await client.send(mail)
-                    Issue.record("Expected validation error for invalid sender.")
+                    Issue.record(
+                        "Expected validation error for invalid sender."
+                    )
                 }
                 catch {
                     if case let .validation(validationError) = error
@@ -147,7 +149,9 @@ struct FeatherSESMailTestSuite {
                         #expect(true)
                     }
                     else {
-                        Issue.record("Expected MailError.validation(.invalidSender).")
+                        Issue.record(
+                            "Expected MailError.validation(.invalidSender)."
+                        )
                     }
                 }
             }
@@ -204,7 +208,9 @@ struct FeatherSESMailTestSuite {
                         #expect(true)
                     }
                     else {
-                        Issue.record("Expected MailError.custom with AWSErrorType prefix.")
+                        Issue.record(
+                            "Expected MailError.custom with AWSErrorType prefix."
+                        )
                     }
                 }
             }
