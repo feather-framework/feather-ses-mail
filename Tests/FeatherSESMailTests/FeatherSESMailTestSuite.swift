@@ -137,7 +137,7 @@ struct FeatherSESMailTestSuite {
                 )
                 do {
                     try await client.send(mail)
-                    #expect(Bool(false))
+                    Issue.record("Expected validation error for invalid sender.")
                 }
                 catch {
                     if case let .validation(validationError) = error
@@ -147,13 +147,13 @@ struct FeatherSESMailTestSuite {
                         #expect(true)
                     }
                     else {
-                        #expect(Bool(false))
+                        Issue.record("Expected MailError.validation(.invalidSender).")
                     }
                 }
             }
         }
         catch {
-            #expect(Bool(false))
+            Issue.record("Unexpected error from test setup.")
         }
     }
 
@@ -175,7 +175,7 @@ struct FeatherSESMailTestSuite {
             }
         }
         catch {
-            #expect(Bool(false))
+            Issue.record("Unexpected error from test setup.")
         }
     }
 
@@ -195,7 +195,7 @@ struct FeatherSESMailTestSuite {
 
                 do {
                     try await client.send(mail)
-                    #expect(Bool(false))
+                    Issue.record("Expected invalid credentials error.")
                 }
                 catch {
                     if case let .custom(message) = error as? MailError,
@@ -204,13 +204,13 @@ struct FeatherSESMailTestSuite {
                         #expect(true)
                     }
                     else {
-                        #expect(Bool(false))
+                        Issue.record("Expected MailError.custom with AWSErrorType prefix.")
                     }
                 }
             }
         }
         catch {
-            #expect(Bool(false))
+            Issue.record("Unexpected error from test setup.")
         }
     }
 
